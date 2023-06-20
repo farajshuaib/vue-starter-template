@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="/" />
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+  <meta name="language" content="arabic,english" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <meta name="theme-color" content="#3a3a3a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="/site.webmanifest" crossorigin="use-credentials" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <meta name="robots" content="index" />
+  <meta http-equiv="Pragma" content="Public" />
+  <meta http-equiv="Cache-Control" content="Public" />
+  <meta property="og:url" content="" />
+  <meta property="og:type" content="" />
+  <meta property="og:title" content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image" content="/logo.svg" />
+  <meta name="author" content="" />
+  <meta name="copyright" content="" />
+  <meta name="description" content="" />
+  <style>
+    #InitScreenDOM {
+      height: 100vh;
+      background-color: #f6fbff;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #InitScreenDOM>div {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 0px 3rem;
+      margin: auto;
+    }
+
+    #InitScreenDOM>div>img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+    }
+
+    #InitScreenDOM>div>i {
+      color: #005caa;
+      font-size: 3rem;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <h1 class="p-3 text-4xl font-bold text-red-700">
+      You need to enable JavaScript to run this app.
+    </h1>
+  </noscript>
+
+  <div id="InitScreenDOM">
+    <div class="w-full sm:w-3/4 lg:w-1/2">
+      <!-- <img alt="logo" src="/logo.svg" loading="lazy" /> -->
+      <i class="bx bx-loader-circle bx-spin"></i>
+    </div>
+  </div>
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
