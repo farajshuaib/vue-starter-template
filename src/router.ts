@@ -1,11 +1,25 @@
-import { RouterView, createRouter, createWebHistory } from "vue-router";
+import {
+  RouteRecordRaw,
+  RouterView,
+  createRouter,
+  createWebHistory,
+} from "vue-router";
 import navigationGuards from "./core/middleware/navigationGuards";
 
-import authRoute from "@/modules/auth/config/router";
+import Dashboard from "@/core/layout/Dashboard.vue";
+import authRoute from "@/modules/auth/router";
+import userRoute from "@/modules/users/router";
+
+export const dashboardRoutes: RouteRecordRaw = {
+  path: "/",
+  component: Dashboard,
+  name: "Dashboard",
+  children: [userRoute],
+};
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [{ path: "/", component: RouterView, children: [authRoute] }],
+  routes: [authRoute, dashboardRoutes],
 });
 
 router.beforeEach(navigationGuards);

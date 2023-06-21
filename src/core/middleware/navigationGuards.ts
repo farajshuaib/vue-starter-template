@@ -6,6 +6,10 @@ export default async function (
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) {
+
+  document.getElementById("InitScreenDOM")?.remove();
+  return next(); // remove this line to enable auth guard
+
   const auth = useAuth();
 
   // if the route is guest only then let the user continue
