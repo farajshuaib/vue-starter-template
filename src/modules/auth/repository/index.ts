@@ -1,23 +1,27 @@
-import { useHttpClient } from "@/core/hooks/useHttpClient";
-import { type AxiosInstance } from "axios";
+import BaseService from "@/core/services/BaseService";
 
-export default class AuthService {
-  private _httpClient: AxiosInstance;
+export default class AuthService extends BaseService {
   constructor() {
-    this._httpClient = useHttpClient();
+    super();
   }
 
   async login(payload: LoginRequestDTO) {
-    return await this._httpClient.post("/auth/login", payload);
+    const { data } = await this.httpClient.post("/auth/login", payload);
+    if (data.token) {
+      this.setClientToken = data.token;
+    }
+    return data;
   }
 
   async register(payload: RegisterRequestDTO) {
-    return await this._httpClient.post("/auth/register", payload);
+    return await this.httpClient.post("/auth/register", payload);
   }
+
   async getProfile() {
-    return await this._httpClient.get("/auth/profile");
+    return await this.httpClient.get("/auth/profile");
   }
+
   async logOut() {
-    return await this._httpClient.post("/auth/logout");
+    return await this.logout();
   }
 }

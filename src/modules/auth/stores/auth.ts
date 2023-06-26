@@ -1,4 +1,3 @@
-import { setToken } from "@/core/hooks/useHttpClient";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { AxiosProgressEvent } from "axios";
@@ -17,7 +16,6 @@ export const useAuth = defineStore("AuthStore", () => {
       is_loading.value = true;
       const { data } = await _repo.login(credentials);
       user.value = data;
-      setToken(data.token);
       return data;
     } catch (e) {
       throw e;
