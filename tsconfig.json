@@ -25,6 +25,8 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "sourceMap": true,
     "types": ["vite/client"],
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]

@@ -1,28 +1,29 @@
-import BaseService from "@/core/services/BaseService";
-import { type AxiosInstance } from "axios";
+import { useHttpClient } from "@/core/hooks/useHttpClient";
+import { AxiosRequestConfig, type AxiosInstance } from "axios";
 
-export default class UsersService extends BaseService {
+export default class UsersServic {
+  private httpClient: AxiosInstance;
   constructor() {
-    super();
+    this.httpClient = useHttpClient();
   }
 
-  async getUsers() {
-    return await this.httpClient.get("/users");
+  async getUsers(config: AxiosRequestConfig) {
+    return await this.httpClient.get("/users", config);
   }
 
-  async getUser(id: string) {
-    return await this.httpClient.get(`/users/${id}`);
+  async getUser(config: AxiosRequestConfig, id: string) {
+    return await this.httpClient.get(`/users/${id}`, config);
   }
 
-  async createUser(data: CreateUserDTO) {
-    return await this.httpClient.post("/users", data);
+  async createUser(config: AxiosRequestConfig) {
+    return await this.httpClient.post("/users", config);
   }
 
-  async updateUser(id: string, data: UpdateUserDTO) {
-    return await this.httpClient.put(`/users/${id}`, data);
+  async updateUser(config: AxiosRequestConfig, id: string) {
+    return await this.httpClient.put(`/users/${id}`, config);
   }
 
-  async deleteUser(id: string) {
-    return await this.httpClient.delete(`/users/${id}`);
+  async deleteUser(config: AxiosRequestConfig, id: string) {
+    return await this.httpClient.delete(`/users/${id}`, config);
   }
 }
