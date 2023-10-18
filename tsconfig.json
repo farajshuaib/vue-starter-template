@@ -5,14 +5,12 @@
     "src/**/*.ts",
     "env.d.ts",
     "src/**/*",
-    "src/**/*.vue",
-    "src/**/*.d.ts"
+    "src/**/*.vue"
   ],
   "compilerOptions": {
     "baseUrl": ".",
     "moduleResolution": "node",
     "paths": {
-      "@/components/*": ["./core/components/*"],
       "@/*": ["./src/*"]
     },
     "target": "esnext",

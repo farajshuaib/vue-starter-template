@@ -1,21 +1,23 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { AxiosProgressEvent } from "axios";
-import AuthService from "../repository";
+import AuthService from "../services/AuthService";
+import { UserData, LoginRequestDTO } from "../DTOs/auth";
+import Container from "typedi";
 
-
-
-export const useAuth = defineStore("AuthStore", () => {
-  const _repo = new AuthService();
+export const AuthController = defineStore("AuthStore", () => {
+  const _repo = Container.get(AuthService);
   //
-  const user = ref<UserData | null>();
+  const user = ref<UserData | null>(null);
   const is_loading = ref(false);
 
   const login = async (credentials: LoginRequestDTO) => {
     try {
       is_loading.value = true;
       const { data } = await _repo.login(credentials);
-      user.value = data;
+      if (data.content.token) {
+        localStorage.setItem("token", data.content.token);
+      }
+      user.value = data.content.user;
       return data;
     } catch (e) {
       throw e;

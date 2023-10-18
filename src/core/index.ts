@@ -4,7 +4,6 @@ import initGlobalComponents from '@/core/components'
 import i18n from './i18n'
 import Toast, { type PluginOptions, POSITION } from 'vue-toastification'
 import { getCurrentLocale } from './i18n'
-import { EAppLocales } from './enums'
 import type { App } from 'vue'
 
 import '@/core/extensions'
@@ -13,13 +12,14 @@ import '@/core/extensions'
 import 'vue-slider-component/theme/default.css'
 import 'vue-toastification/dist/index.css'
 import '@/core/styles/index.css'
+import { AppLocales } from './constant'
 
 const toastOptions: PluginOptions = {
   position: POSITION.BOTTOM_RIGHT,
   timeout: 3000,
   hideProgressBar: true,
   closeOnClick: true,
-  rtl: getCurrentLocale() === EAppLocales.AR,
+  rtl: getCurrentLocale() === AppLocales.AR,
   toastDefaults: {
     success: {
       toastClassName: 'bg-success text-white text-sm'

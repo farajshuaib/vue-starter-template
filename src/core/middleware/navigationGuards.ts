@@ -1,5 +1,5 @@
-import { useAuth } from "@/modules/auth/stores/auth";
 import { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
+import { AuthController } from '../controllers/auth';
 
 export default async function (
   to: RouteLocationNormalized,
@@ -10,7 +10,7 @@ export default async function (
   document.getElementById("InitScreenDOM")?.remove();
   return next(); // remove this line to enable auth guard
 
-  const auth = useAuth();
+  const auth = AuthController();
 
   // if the route is guest only then let the user continue
   if (to.meta.guest) {
