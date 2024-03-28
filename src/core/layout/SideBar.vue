@@ -1,93 +1,63 @@
 <template>
-  <nav
-    id="sidebar"
-    role="sidebar"
-    :class="
-      is_active ? 'rtl:right-0 ltr:left-0' : 'rtl:-right-3/4 ltr:-left-3/4'
-    "
-    class="absolute z-20 w-3/4 h-full overflow-y-scroll bg-white shadow-md lg:w-fit scrollbar-hidden lg:static"
+  <aside
+    :class="is_active ? '-translate-x-0' : '-translate-x-full'"
+    class="fixed z-20 flex flex-col h-screen overflow-auto transition-transform duration-150 ease-in transform shadow-xl bg-background ltr:left-0 rtl:right-0 lg:static w-80 shadow-primary/10"
   >
-    <ul class="flex flex-col gap-4 my-5">
-      <li
-        v-for="(route, index) in dashboardRoutes.children"
-        :key="index"
-        class="w-full"
+    <div>
+      <div
+        class="flex items-center justify-between px-3 py-4 lg:justify-center"
       >
-        <div v-if="route.children && !route.children.isEmpty()">
-          <button
-            @click="
-              () => {
-                toggleMenu = toggleMenu === route.path ? '' : route.path;
-              }
-            "
-            :class="
-              router.currentRoute.value.fullPath.includes(route.path)
-                ? 'border-l-4 border-primary text-primary font-medium'
-                : 'text-gray800'
-            "
-            class="flex items-center justify-between w-full px-4 py-3 text-lg"
-          >
-            <div className="flex items-center">
-              <span
-                :class="
-                  router.currentRoute.value.fullPath.includes(route.path)
-                    ? 'text-primary'
-                    : 'text-gray600'
-                "
-              >
-              </span>
-              <span className="mx-2"> {{ route.name }}</span>
-            </div>
-            <i
-              :class="toggleMenu === route.path ? 'rotate-180' : ''"
-              class="text-xl transition-all duration-300 transform bx bx-chevron-down text-gray700"
-            ></i>
-          </button>
-          <ul
-            v-if="toggleMenu === route.path"
-            class="overflow-hidden transition-all border-l-2 border-gray800 ms-5 duration-30"
-          >
-            <li
-              v-for="(subroute, innerIndex) in route.children"
-              :key="innerIndex"
-            >
-              <router-link
-                :to="{ name: subroute.name }"
-                class="flex items-center w-full px-4 py-3 text-gray-600"
-                active-class="font-medium border-l-4 border-primary !text-primary"
-              >
-                {{ subroute.meta?.title }}
-              </router-link>
-            </li>
-          </ul>
-        </div>
+        <img
+          src=""
+          @click="
+            $router.push({
+              name: ERoutesName.MAIN,
+            })
+          "
+          alt=""
+          loading="lazy"
+          class="h-12 cursor-pointer"
+        />
+        <button class="lg:hidden" @click="$emit('toggleSidebar')">
+          <i class="text-3xl bx bx-menu text-primary"></i>
+        </button>
+      </div>
+    </div>
+    <template v-for="route in menu" :key="route.name">
+      <div class="px-2" >
         <router-link
-          v-else
-          :to="{ name: route.name }"
-          class="flex items-center w-full px-4 py-3 text-lg text-gray-600"
-          active-class="font-medium border-l-4 border-primary !text-primary"
+          :to="{
+            name: route.name,
+          }"
+          class="inline-flex flex-row items-center w-full gap-2 px-4 py-1"
+          active-class="font-medium rounded-lg bg-primary text-primary-foreground"
         >
-          {{ route.meta?.title }}
+          <i :class="route.icon" class="text-xl"></i>
+          <span class="mx-1 leading-10 text-md !whitespace-nowrap">{{
+            route.title
+          }}</span>
         </router-link>
-      </li>
-    </ul>
-  </nav>
+      </div>
+    </template>
+  </aside>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, type Ref } from "vue";
-import { RouteRecordRaw, useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
-import { dashboardRoutes } from "@/router";
+import { navigationMenu } from "../constant/navigationMenu";
+import { ref } from "vue";
+import { ERoutesName } from "../constant/ERoutesName";
 
 defineProps<{
   is_active: boolean;
 }>();
 
-const emit = defineEmits(["toggleSidebar"]);
-const router = useRouter();
-const toggleMenu = ref("");
+defineEmits(["toggleSidebar"]);
 
-const toggleSidebar = () => {
-  emit("toggleSidebar");
-};
+const menu = ref(
+  navigationMenu.map((item) => {
+    return {
+      ...item,
+      is_active: false,
+    };
+  })
+);
 </script>

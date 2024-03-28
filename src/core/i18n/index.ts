@@ -1,6 +1,6 @@
 import locales from '@/assets/locales'
 import { createI18n } from 'vue-i18n'
-import { AppLocales } from '../constant'
+import { EAppLocales } from '../constant/EAppLocales'
 
 const i18n = createI18n({
   locale: localStorage.getItem('locale') || 'en', // set locale
@@ -14,10 +14,10 @@ export const t = i18n.global.t
 
 export const getCurrentLocale = () => i18n.global.locale.value
 
-export function setLocale(newLocale: AppLocales) {
+export function setLocale(newLocale: EAppLocales) {
   localStorage.setItem('locale', newLocale)
-  document.title = newLocale === AppLocales.EN ? 'Vue3 Boilerplate' : 'قالب بويلرپلیت ویو 3'
-  document.documentElement.setAttribute('dir', newLocale === AppLocales.AR ? 'rtl' : 'ltr')
+  document.title = newLocale === EAppLocales.EN ? 'Vue3 Boilerplate' : 'قالب بويلرپلیت ویو 3'
+  document.documentElement.setAttribute('dir', newLocale === EAppLocales.AR ? 'rtl' : 'ltr')
   document.body.setAttribute('dir', newLocale === 'ar' ? 'rtl' : 'ltr')
   document.documentElement.setAttribute('lang', newLocale)
   document.body.setAttribute('lang', newLocale)

@@ -1,48 +1,50 @@
-import router from '@/router'
-import { createPinia } from 'pinia'
-import initGlobalComponents from '@/core/components'
-import i18n from './i18n'
-import Toast, { type PluginOptions, POSITION } from 'vue-toastification'
-import { getCurrentLocale } from './i18n'
-import type { App } from 'vue'
+import router from "@/router";
+import { createPinia } from "pinia";
+import type { App } from "vue";
+import { initializeApp as initFirebaseApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import config from "@/core/config";
+import Toast, { POSITION } from "vue-toastification";
 
-import '@/core/extensions'
+import "@/assets/index.css";
+import "@/core/styles/index.scss";
+import "vue-toastification/dist/index.css";
 
-// init css
-import 'vue-slider-component/theme/default.css'
-import 'vue-toastification/dist/index.css'
-import '@/core/styles/index.css'
-import { AppLocales } from './constant'
-
-const toastOptions: PluginOptions = {
+const toastOptions = {
   position: POSITION.BOTTOM_RIGHT,
   timeout: 3000,
+  rtl: true,
   hideProgressBar: true,
   closeOnClick: true,
-  rtl: getCurrentLocale() === AppLocales.AR,
   toastDefaults: {
     success: {
-      toastClassName: 'bg-success text-white text-sm'
+      toastClassName: "bg-success text-white text-sm",
     },
     error: {
-      toastClassName: 'bg-danger text-white text-sm'
+      toastClassName: "bg-danger text-white text-sm",
     },
     warning: {
-      toastClassName: 'bg-warning text-white text-sm'
-    }
-  }
-}
+      toastClassName: "bg-warning text-white text-sm",
+    },
+  },
+};
 
 function initializeApp(app: App) {
-  // Initialize global Components
-  initGlobalComponents(app)
+  app.use(Toast, toastOptions);
+  app.use(createPinia());
+  app.use(router);
+  app.mount("#app");
 
+  // const firebaseApp = initFirebaseApp(config.firebaseConfig);
+  // getAnalytics(firebaseApp);
 
-  app.use(Toast, toastOptions)
-  app.use(createPinia())
-  app.use(router)
-  app.use(i18n)
-  app.mount('#app')
+  // Global error handler
+  app.config.errorHandler = (err, instance, info) => {
+    // Handle the error globally
+    console.error("Global error:", err);
+    console.log("Vue instance:", instance);
+    console.log("Error info:", info);
+  };
 }
 
-export default initializeApp
+export default initializeApp;

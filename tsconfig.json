@@ -1,32 +1,35 @@
 {
-  "exclude": ["node_modules", ".vscode"],
-  "include": [
-    "components.d.ts",
-    "src/**/*.ts",
-    "env.d.ts",
-    "src/**/*",
-    "src/**/*.vue"
-  ],
   "compilerOptions": {
-    "baseUrl": ".",
-    "moduleResolution": "node",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+
+
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
-    "types": ["vite/client"],
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
-  }
+
+    "paths": {
+      "@/*": ["./src/*"],
+      "src/*": ["./src/*"],
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

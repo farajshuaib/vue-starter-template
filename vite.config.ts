@@ -1,13 +1,16 @@
-import { fileURLToPath, URL } from "node:url";
-
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
+import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      script: {
+        defineModel: true,
+      },
+    }),
     VitePWA({
       registerType: "autoUpdate",
       injectRegister: "auto",
@@ -40,8 +43,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
-    },
+      "@": path.resolve(__dirname, "./src"),
+      "src": path.resolve(__dirname, "./src"),    },
   },
   define: {
     __VUE_I18N_FULL_INSTALL__: true,

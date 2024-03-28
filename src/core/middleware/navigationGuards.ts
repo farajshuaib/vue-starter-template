@@ -1,50 +1,31 @@
+import { useAuth } from "@/features/Auth/controllers/auth";
 import { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
-import { AuthController } from '../controllers/auth';
 
-export default async function (
+export const navigationGuards = async (
   to: RouteLocationNormalized,
-  from: RouteLocationNormalized,
+  _: RouteLocationNormalized,
   next: NavigationGuardNext
-) {
-
-  document.getElementById("InitScreenDOM")?.remove();
-  return next(); // remove this line to enable auth guard
-
-  const auth = AuthController();
-
-  // if the route is guest only then let the user continue
+) => {
   if (to.meta.guest) {
     document.getElementById("InitScreenDOM")?.remove();
     return next();
   }
 
-  if (!auth.user) {
-    try {
-      const res = await auth.getProfile();
-      document.getElementById("InitScreenDOM")?.remove();
-
-      if (res) {
-        // continue to the route
-        return next();
-      }
-
-      // if the user is not logged in and the route is not guest only then redirect to login
-      if (to.meta.guest) {
-        return next();
-      }
-
-      return next("/auth/login");
-    } catch (error) {
-      return next("/auth/login");
-    }
+  if (!localStorage.getItem("token")) {
+    document.getElementById("InitScreenDOM")?.remove();
+    return next("/auth/login");
   }
 
-  // otherwise continue to the route
-  document.getElementById("InitScreenDOM")?.remove();
+  const auth = useAuth();
+
+  if (!auth.user) {
+    await auth.getProfile();
+  }
+
   next();
 
   // Scroll page to top on every route change
   setTimeout(() => {
     window.scrollTo(0, 0);
   }, 100);
-}
+};
