@@ -1,9 +1,6 @@
 import router from "@/router";
 import { createPinia } from "pinia";
 import type { App } from "vue";
-import { initializeApp as initFirebaseApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import config from "@/core/config";
 import Toast, { POSITION } from "vue-toastification";
 
 import "@/assets/index.css";

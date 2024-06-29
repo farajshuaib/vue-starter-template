@@ -1,16 +1,15 @@
 import { type AxiosResponse } from "axios";
 import { UserData } from "@/features/Auth/models/UserData.ts";
-import { Service } from "typedi";
 import { LoginRequestDTO } from "@/features/Auth/models/LoginRequestDTO.ts";
 import { HttpClient } from "@/core/network/httpClient.ts";
 import CoreResponseDto from "@/core/constant/ICoreResponseDto.ts";
-import { inject } from "inversify";
+import { Injectable, Inject } from 'di-injectable';
 
-@Service()
+@Injectable()
 export default class AuthService {
   private httpClient: HttpClient;
 
-  constructor(@inject(HttpClient) httpClient: HttpClient) {
+  constructor(@Inject(HttpClient) httpClient: HttpClient) {
     this.httpClient = httpClient;
   }
 

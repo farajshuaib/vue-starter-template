@@ -3,11 +3,12 @@ import { ref } from "vue";
 import AuthService from "@/features/Auth/services/auth.ts";
 import { LoginRequestDTO } from "@/features/Auth/models/LoginRequestDTO.ts";
 import { UserData } from "@/features/Auth/models/UserData.ts";
-import { Container } from "typedi";
 import { jwtDecode } from "@/core/helpers/jwtDecode";
+import { ServiceProvider } from "di-injectable";
 
 export const useAuth = defineStore("AuthStore", () => {
-  const _repo = Container.get(AuthService);
+  const serviceProvider = new ServiceProvider();
+  const _repo = serviceProvider.resolve<AuthService>(AuthService);
   //
   const user = ref<UserData | null>();
   const is_loading = ref(false);
@@ -33,7 +34,7 @@ export const useAuth = defineStore("AuthStore", () => {
       const token = localStorage.getItem("token");
       if (!token) {
         return;
-      }      
+      }
       const data = jwtDecode(token);
       user.value = data;
     } catch (e) {
@@ -55,4 +56,3 @@ export const useAuth = defineStore("AuthStore", () => {
     is_loading,
   } as const;
 });
-

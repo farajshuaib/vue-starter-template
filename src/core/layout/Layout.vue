@@ -15,7 +15,7 @@
       </section>
       <footer class="p-5 py-5 text-center bg-primary/5">
         <p>
-          <span class="text-primary">Health care app</span> ©
+          <span class="text-primary">Vite app</span> ©
           {{ new Date().getFullYear() }}
         </p>
       </footer>

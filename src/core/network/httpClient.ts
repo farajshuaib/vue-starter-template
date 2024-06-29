@@ -2,9 +2,9 @@ import axios, { Axios, AxiosResponse, type AxiosRequestConfig } from "axios";
 import { onRequest } from "./interceptors/request";
 import { onError, onResponse } from "./interceptors/response";
 import appConfig from "@/core/config";
-import { injectable } from "inversify";
+import { Injectable } from "di-injectable";
 
-@injectable()
+@Injectable()
 export class HttpClient {
   private readonly instance: Axios;
 
