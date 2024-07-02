@@ -14,6 +14,6 @@ This is a custom Vite template for creating Vue.js projects. It includes all the
 To create a new project using this template, you can use the Vite CLI tool:
 
 ```bash
-npm create vite@latest <your-project-name> -- --template https://github.com/farajshuaib/vue-starter-template
+npx degit farajshuaib/vue-starter-template my-project
 ```
 
