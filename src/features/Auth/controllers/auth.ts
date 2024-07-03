@@ -5,10 +5,12 @@ import { LoginRequestDTO } from "@/features/Auth/models/LoginRequestDTO.ts";
 import { UserData } from "@/features/Auth/models/UserData.ts";
 import { jwtDecode } from "@/core/helpers/jwtDecode";
 import { ServiceProvider } from "di-injectable";
+import { useRouter } from "vue-router";
+import { ERoutesName } from "@/core/constant/ERoutesName";
 
 export const useAuth = defineStore("AuthStore", () => {
-  const serviceProvider = new ServiceProvider();
-  const _repo = serviceProvider.resolve<AuthService>(AuthService);
+  const router = useRouter();
+  const _repo = new ServiceProvider().resolve<AuthService>(AuthService);
   //
   const user = ref<UserData | null>();
   const is_loading = ref(false);
@@ -18,7 +20,7 @@ export const useAuth = defineStore("AuthStore", () => {
       is_loading.value = true;
       const response = await _repo.login(credentials);
       user.value = response.data.content;
-      localStorage.setItem("token", response.data.content.value);
+      localStorage.setItem("token", response.data.content.token);
       localStorage.setItem("refreshToken", response.data.content.refreshToken);
       return response.data;
     } catch (e) {
@@ -45,7 +47,7 @@ export const useAuth = defineStore("AuthStore", () => {
 
   const logout = async () => {
     localStorage.clear();
-    location.href = "/auth/login";
+    router.push(ERoutesName.LOGIN);
   };
 
   return {

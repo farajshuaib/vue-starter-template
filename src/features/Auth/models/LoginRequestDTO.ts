@@ -1,4 +1,4 @@
 export interface LoginRequestDTO {
-    userName: string;
-    pin: string;
+    email: string;
+    password: string;
 }

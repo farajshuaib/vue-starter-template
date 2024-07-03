@@ -1,9 +1,8 @@
 export interface UserData {
-  validTo: string;
+  id: string;
+  username: string;
+  email: string;
+  phoneNumber: string;
+  token: string;
   refreshToken: string;
-  systemIdentity: string;
-  creds: string;
-  tag: string;
-  userKey: string;
-  value: string;
 }

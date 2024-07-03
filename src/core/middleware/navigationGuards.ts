@@ -6,23 +6,28 @@ export const navigationGuards = async (
   _: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  if (to.meta.guest) {
-    document.getElementById("InitScreenDOM")?.remove();
+  document.getElementById("InitScreenDOM")?.remove();
     return next();
-  }
 
-  if (!localStorage.getItem("token")) {
-    document.getElementById("InitScreenDOM")?.remove();
-    return next("/auth/login");
-  }
+    // remove comment when you need to implement navigation guards
+  
+  // if (to.meta.guest) {
+  //   document.getElementById("InitScreenDOM")?.remove();
+  //   return next();
+  // }
 
-  const auth = useAuth();
+  // if (!localStorage.getItem("token")) {
+  //   document.getElementById("InitScreenDOM")?.remove();
+  //   return next("/auth/login");
+  // }
 
-  if (!auth.user) {
-    await auth.getProfile();
-  }
+  // const auth = useAuth();
 
-  next();
+  // if (!auth.user) {
+  //   await auth.getProfile();
+  // }
+
+  // next();
 
   // Scroll page to top on every route change
   setTimeout(() => {

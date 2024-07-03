@@ -5,16 +5,16 @@
     </h1>
 
     <div class="my-5">
-      <label for="email">Username</label>
+      <label for="email">email</label>
       <Field
-          name="userName"
-          id="userName"
+          name="email"
+          id="email"
           type="text"
-          placeholder="userName"
+          placeholder="email"
           class="input"
-          v-model="state.userName"
+          v-model="state.email"
       />
-      <ErrorMessage class="error-message" name="userName"/>
+      <ErrorMessage class="error-message" name="email"/>
     </div>
 
     <div class="my-5">
@@ -26,7 +26,7 @@
           type="password"
           placeholder="password"
           class="input"
-          v-model="state.pin"
+          v-model="state.password"
       />
       <ErrorMessage class="error-message" name="password"/>
     </div>
@@ -64,8 +64,8 @@ const auth = useAuth();
 const router = useRouter();
 
 const state = reactive({
-  userName: "",
-  pin: "",
+  email: "",
+  password: "",
 });
 
 const errorMessage = ref("");
