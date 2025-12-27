@@ -1,0 +1,136 @@
+{
+  "stats": [
+    {
+      "id": "revenue",
+      "label": "New revenue",
+      "value": 48200,
+      "change": 12.4,
+      "trend": "up",
+      "description": "vs last 30 days"
+    },
+    {
+      "id": "activations",
+      "label": "Product activations",
+      "value": 3850,
+      "change": 6.1,
+      "trend": "up",
+      "description": "teams completed onboarding"
+    },
+    {
+      "id": "retention",
+      "label": "Day-30 retention",
+      "value": 86.2,
+      "change": -3.4,
+      "trend": "down",
+      "description": "critical dips on mobile"
+    },
+    {
+      "id": "netPromoter",
+      "label": "Net promoter",
+      "value": 47,
+      "change": 2.1,
+      "trend": "up",
+      "description": "steady improvement"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Onboarding journey revamp",
+      "owner": "Growth",
+      "status": "active",
+      "due": "2024-01-08",
+      "progress": 62,
+      "priority": "high"
+    },
+    {
+      "id": 2,
+      "name": "Mobile release readiness",
+      "owner": "Mobile",
+      "status": "upcoming",
+      "due": "2024-01-15",
+      "progress": 25,
+      "priority": "medium"
+    },
+    {
+      "id": 3,
+      "name": "Self-serve billing rollout",
+      "owner": "Revenue",
+      "status": "blocked",
+      "due": "2024-01-11",
+      "progress": 40,
+      "priority": "high"
+    },
+    {
+      "id": 4,
+      "name": "AI suggestions beta",
+      "owner": "Product",
+      "status": "active",
+      "due": "2024-01-05",
+      "progress": 78,
+      "priority": "medium"
+    },
+    {
+      "id": 5,
+      "name": "Service quality playbook",
+      "owner": "CX",
+      "status": "done",
+      "due": "2023-12-19",
+      "progress": 100,
+      "priority": "low"
+    }
+  ],
+  "activity": [
+    {
+      "id": 1,
+      "title": "Payments deployed",
+      "description": "Payments service v2 shipped to production",
+      "timestamp": "2024-01-03T09:15:00.000Z",
+      "category": "deploy"
+    },
+    {
+      "id": 2,
+      "title": "Customer interview",
+      "description": "Northwind requested shared usage analytics",
+      "timestamp": "2024-01-02T17:24:00.000Z",
+      "category": "insight"
+    },
+    {
+      "id": 3,
+      "title": "Incident retro",
+      "description": "Follow-up items closed for Oct outage",
+      "timestamp": "2023-12-29T13:00:00.000Z",
+      "category": "incident"
+    },
+    {
+      "id": 4,
+      "title": "Hiring update",
+      "description": "2 senior engineers accepted offers",
+      "timestamp": "2023-12-28T08:45:00.000Z",
+      "category": "people"
+    }
+  ],
+  "team": [
+    {
+      "id": 1,
+      "name": "Product Design",
+      "focus": "Checkout journey",
+      "load": 0.76,
+      "members": 5
+    },
+    {
+      "id": 2,
+      "name": "Mobile",
+      "focus": "Feature parity on Android",
+      "load": 0.88,
+      "members": 7
+    },
+    {
+      "id": 3,
+      "name": "Platform",
+      "focus": "Observability rollout",
+      "load": 0.54,
+      "members": 9
+    }
+  ]
+}
