@@ -1,4 +1,5 @@
-import 'reflect-metadata';
+import "reflect-metadata";
+import "@/core/extensions";
 import { createApp, type App } from "vue";
 
 import RootApp from "./App.vue";
