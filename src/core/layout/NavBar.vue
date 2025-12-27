@@ -20,13 +20,40 @@
                 @click="() => setTheme(Theme.DARK)"
                 class="flex items-center gap-2"
             >
-              <i class='bx bx-moon'></i> <span>  Dark  </span>
+              <i class='bx bx-moon'></i>
+              <span>Dark</span>
+              <span
+                  class="ml-auto text-xs text-muted-foreground"
+                  v-if="currentTheme === Theme.DARK"
+              >
+                active
+              </span>
             </DropdownMenuItem>
             <DropdownMenuItem
                 @click="() => setTheme(Theme.LIGHT)"
                 class="flex items-center gap-2"
             >
-              <i class='bx bx-sun'></i> <span>  Light  </span>
+              <i class='bx bx-sun'></i>
+              <span>Light</span>
+              <span
+                  class="ml-auto text-xs text-muted-foreground"
+                  v-if="currentTheme === Theme.LIGHT && hasStoredPreference"
+              >
+                active
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+                @click="resetThemePreference"
+                class="flex items-center gap-2"
+            >
+              <i class='bx bx-desktop'></i>
+              <span>System default</span>
+              <span
+                  class="ml-auto text-xs text-muted-foreground"
+                  v-if="!hasStoredPreference"
+              >
+                auto
+              </span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -73,19 +100,10 @@ import {
   Avatar, AvatarFallback, AvatarImage
 } from "@/core/components/ui/avatar";
 import {Theme} from "@/core/constant/Theme.ts";
+import { useTheme } from "@/core/composables/useTheme";
 
 const auth = useAuth();
 
-
-const setTheme = (theme: Theme) => {
-  localStorage.theme = theme
-
-  if (theme === Theme.DARK) {
-    document.documentElement.classList.add(Theme.DARK)
-  } else {
-    document.documentElement.classList.remove(Theme.DARK)
-  }
-}
-
-
+const { setTheme, resetThemePreference, currentTheme, hasStoredPreference } =
+    useTheme();
 </script>
