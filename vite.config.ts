@@ -3,6 +3,12 @@ import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 
+const isPWAEnabled = process.env.VITE_ENABLE_PWA !== "false";
+const pwaMode =
+  (process.env.VITE_PWA_MODE as "development" | "production" | undefined) ??
+  "development";
+const shouldMinifyPWA = pwaMode === "production";
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -12,12 +18,16 @@ export default defineConfig({
       },
     }),
     VitePWA({
+      disable: !isPWAEnabled,
+      mode: pwaMode,
       registerType: "autoUpdate",
       injectRegister: "auto",
+      minify: shouldMinifyPWA,
       workbox: {
         clientsClaim: true,
         skipWaiting: true,
         disableDevLogs: true,
+        cleanupOutdatedCaches: true,
       },
       devOptions: {
         enabled: false,
